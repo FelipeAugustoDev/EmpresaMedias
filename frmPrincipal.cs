@@ -13,10 +13,32 @@ namespace Empresa1
     public partial class frmPrincipal : Form
     {
         int CNPJ = 0;
-
-        public frmPrincipal()
+        public void LimparTudo()
         {
-            InitializeComponent();
+            lboMedias.Items.Clear();
+        }
+        public double Media()
+        {
+            double medias = 0;
+            double soma = 0;
+            int qnt = 0;
+            foreach (var item in lboItens.Items)
+            {
+                soma += double.Parse(txbValor.Text);
+                qnt++;
+            }
+            return medias = soma / qnt;
+        }
+        public double Media(int CNPJ)
+        {
+            double medias = 0;
+            double soma = 0;
+            foreach (var item in lboItens.Items)
+            {
+                soma += double.Parse(txbValor.Text);
+                CNPJ++;
+            }
+            return medias = soma / CNPJ;
         }
 
 
@@ -27,50 +49,40 @@ namespace Empresa1
         /// <returns name="Metodos()"> </returns>
         private void btnAdd_Click(object sender, EventArgs e)
         {
-            double valor = 0;
-            int estoque = 0;
-            double resul = 0;
             if (txbCNPJ.Text.Trim() != "")
             {
+                //encaixar o nmr de vezes que o cnpj passou, aqui.
                 try
                 {
                     Informacoes info = new Informacoes(txbNome.Text, double.Parse(txbValor.Text), int.Parse(txbEstoque.Text), int.Parse(txbCNPJ.Text));
                     lboItens.Items.Add(info);
+                    CNPJ++;
                 }
                 catch (Exception g)
                 {
-                    MessageBox.Show(g.Message);
+                    MessageBox.Show("Atençao! "+ g.Message, MessageBoxIcon.Exclamation.ToString());
                     return;
                 }
             }
             else { return; }
 
-            estoque += int.Parse(txbEstoque.Text);
-            valor += double.Parse(txbValor.Text);
 
-            Metodos(estoque, valor);
+
+            lboMedias.Items.Add(Media());
+            lboMedias.Items.Add(Media(CNPJ));
+            //ENCAIXAR O MÉTODO DE MÉDIA DIRETAMENT NO lboMedia
+
+
+        }
+        public frmPrincipal()
+        {
+            InitializeComponent();
+        }
+
+        private void lboMedias_SelectedIndexChanged(object sender, EventArgs e)
+        {
             
-
-
+            
         }
-        /// <summary>
-        /// Metodo para Média Total
-        /// </summary>
-        /// <param name="estoque"></param>
-        /// <param name="valor"></param>
-        private void Metodos(int estoque, double valor)
-        {
-            double resultado = valor / (double)estoque;
-        }
-
-        /// <summary>
-        /// Método para média de cnpj
-        /// </summary>
-        /// <param name="CNPJ"></param>
-        public void MetodosCNPJ(int CNPJ)
-        {
-
-        }
-
     }
 }

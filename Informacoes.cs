@@ -26,10 +26,12 @@ namespace Empresa1
         public double Valor
         {
             get { return _valor;}
+            
         }
         public int Estoque
         {
             get { return _estoque; }
+           
         }
         public int CNPJ
         {
@@ -46,14 +48,17 @@ namespace Empresa1
         public override string ToString()
         {
             return _nome +" "+ _valor + " , unid: " + _estoque;
+            
         }
 
+
+        /// <summary>
+        /// Construtor vazio
+        /// </summary>
         public Informacoes()
         {
 
         }
-
-
         /// <summary>
         /// Construtor de Objeto para tabela
         /// </summary>
@@ -68,5 +73,8 @@ namespace Empresa1
             this._estoque = Estoque;
             this._cnpj = CNPJ;
         }
+
+
+
     }
 }
